@@ -32,18 +32,27 @@
   */
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
+#include "fatfs.h"
+#include "usb_host.h"
 
 /* USER CODE BEGIN Includes */
-
+#include "debug.h"
+#include "waveplayer.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
 I2S_HandleTypeDef hi2s3;
 DMA_HandleTypeDef hdma_spi3_tx;
 
+SPI_HandleTypeDef hspi1;
+
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
 extern const uint16_t AUDIO_SAMPLE[];
+extern uint8_t retUSBH;
+extern char USBH_Path[4];
+USBH_StatusTypeDef usb_status;
+FATFS fatfs;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -51,6 +60,8 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
 static void MX_I2S3_Init(void);
+static void MX_SPI1_Init(void);
+void MX_USB_HOST_Process(void);
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
@@ -80,9 +91,19 @@ int main(void)
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_I2S3_Init();
+  MX_SPI1_Init();
+  MX_FATFS_Init();
+  MX_USB_HOST_Init();
 
   /* USER CODE BEGIN 2 */
-
+	printf("Init complete");
+	MX_USB_HOST_Process();
+	if(f_mount (&fatfs, USBH_Path, 1)!=FR_OK)
+	{
+		printf("QQ");
+		while(1);
+	}
+	WavePlayerStart("0:/test.wav");
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -90,10 +111,8 @@ int main(void)
   while (1)
   {
   /* USER CODE END WHILE */
-		//HAL_I2S_Transmit_DMA(&hi2s3,(uint16_t*)AUDIO_SAMPLE, 32768);
-		HAL_I2S_Transmit(&hi2s3, (uint16_t*)AUDIO_SAMPLE, 88, 65536);
-		
-		
+    
+
   /* USER CODE BEGIN 3 */
 
   }
@@ -109,22 +128,24 @@ void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
   RCC_PeriphCLKInitTypeDef PeriphClkInitStruct;
 
-  __HAL_RCC_PLL_PLLM_CONFIG(16);
-
-  __HAL_RCC_PLL_PLLSOURCE_CONFIG(RCC_PLLSOURCE_HSI);
-
   __PWR_CLK_ENABLE();
 
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE3);
 
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI|RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.HSICalibrationValue = 16;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+  RCC_OscInitStruct.PLL.PLLM = 15;
+  RCC_OscInitStruct.PLL.PLLN = 144;
+  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+  RCC_OscInitStruct.PLL.PLLQ = 5;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
 
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_I2S;
-  PeriphClkInitStruct.PLLI2S.PLLI2SN = 192;
+  PeriphClkInitStruct.PLLI2S.PLLI2SN = 60;
   PeriphClkInitStruct.PLLI2S.PLLI2SR = 2;
   HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
 
@@ -144,12 +165,32 @@ void MX_I2S3_Init(void)
   hi2s3.Init.Mode = I2S_MODE_MASTER_TX;
   hi2s3.Init.Standard = I2S_STANDARD_PHILLIPS;
   hi2s3.Init.DataFormat = I2S_DATAFORMAT_16B;
-  hi2s3.Init.MCLKOutput = I2S_MCLKOUTPUT_DISABLE;
-  hi2s3.Init.AudioFreq = I2S_AUDIOFREQ_192K;
+  hi2s3.Init.MCLKOutput = I2S_MCLKOUTPUT_ENABLE;
+  hi2s3.Init.AudioFreq = I2S_AUDIOFREQ_44K;
   hi2s3.Init.CPOL = I2S_CPOL_LOW;
   hi2s3.Init.ClockSource = I2S_CLOCK_PLL;
   hi2s3.Init.FullDuplexMode = I2S_FULLDUPLEXMODE_DISABLE;
   HAL_I2S_Init(&hi2s3);
+
+}
+
+/* SPI1 init function */
+void MX_SPI1_Init(void)
+{
+
+  hspi1.Instance = SPI1;
+  hspi1.Init.Mode = SPI_MODE_MASTER;
+  hspi1.Init.Direction = SPI_DIRECTION_2LINES;
+  hspi1.Init.DataSize = SPI_DATASIZE_8BIT;
+  hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
+  hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
+  hspi1.Init.NSS = SPI_NSS_SOFT;
+  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
+  hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
+  hspi1.Init.TIMode = SPI_TIMODE_DISABLED;
+  hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLED;
+  hspi1.Init.CRCPolynomial = 10;
+  HAL_SPI_Init(&hspi1);
 
 }
 
@@ -167,14 +208,21 @@ void MX_DMA_Init(void)
 
 }
 
-/** Pinout Configuration
+/** Configure pins as 
+        * Analog 
+        * Input 
+        * Output
+        * EVENT_OUT
+        * EXTI
 */
 void MX_GPIO_Init(void)
 {
 
   /* GPIO Ports Clock Enable */
+  __GPIOH_CLK_ENABLE();
   __GPIOA_CLK_ENABLE();
   __GPIOC_CLK_ENABLE();
+  __GPIOB_CLK_ENABLE();
 
 }
 
