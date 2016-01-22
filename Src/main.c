@@ -53,6 +53,7 @@ extern char SD_Path[4];  /* SD logical drive path */
 FATFS fatfs;
 int res;
 HAL_SD_CardInfoTypedef SDInfo;
+int playindex=1;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -100,7 +101,20 @@ int main(void)
 	{
 		printf("QQ");
 	}
-	WavePlayerStart_DMA("0:/test.wav");
+	WavePlayerStart_DMA("0:/akuno.wav");
+	//playindex=rand()%6;
+	/*switch(playindex)
+	{
+		case :
+			WavePlayerStart_DMA("0:/test.wav");
+			break;
+		case 1:
+			WavePlayerStart_DMA("0:/akuno.wav");
+			break;
+		default:
+			WavePlayerStart_DMA("0:/akuno.wav");
+			break;
+	}*/
   /* USER CODE END 2 */
 
   /* Infinite loop */

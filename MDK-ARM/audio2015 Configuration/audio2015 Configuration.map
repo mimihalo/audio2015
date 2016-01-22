@@ -1021,6 +1021,7 @@ Removing Unused input sections from the image.
     Removing main.o(.revsh_text), (4 bytes).
     Removing main.o(.rrx_text), (6 bytes).
     Removing main.o(.bss), (88 bytes).
+    Removing main.o(.data), (4 bytes).
     Removing stm32f4xx_it.o(.rev16_text), (4 bytes).
     Removing stm32f4xx_it.o(.revsh_text), (4 bytes).
     Removing stm32f4xx_it.o(.rrx_text), (6 bytes).
@@ -1107,7 +1108,7 @@ Removing Unused input sections from the image.
     Removing cdrcmple.o(.text), (48 bytes).
     Removing depilogue.o(.text), (186 bytes).
 
-326 unused section(s) (total 22290 bytes) removed from the image.
+327 unused section(s) (total 22294 bytes) removed from the image.
 
 ==============================================================================
 
@@ -1372,29 +1373,29 @@ Image Symbol Table
     i.ld_clust                               0x080032e8   Section        0  ff.o(i.ld_clust)
     ld_clust                                 0x080032e9   Thumb Code    20  ff.o(i.ld_clust)
     i.main                                   0x080032fc   Section        0  main.o(i.main)
-    i.mem_cpy                                0x080033c8   Section        0  ff.o(i.mem_cpy)
-    mem_cpy                                  0x080033c9   Thumb Code    18  ff.o(i.mem_cpy)
-    i.mem_set                                0x080033da   Section        0  ff.o(i.mem_set)
-    mem_set                                  0x080033db   Thumb Code    14  ff.o(i.mem_set)
-    i.move_window                            0x080033e8   Section        0  ff.o(i.move_window)
-    move_window                              0x080033e9   Thumb Code    54  ff.o(i.move_window)
-    i.put_fat                                0x0800341e   Section        0  ff.o(i.put_fat)
-    i.remove_chain                           0x08003516   Section        0  ff.o(i.remove_chain)
-    remove_chain                             0x08003517   Thumb Code   110  ff.o(i.remove_chain)
-    i.st_clust                               0x08003584   Section        0  ff.o(i.st_clust)
-    st_clust                                 0x08003585   Thumb Code    16  ff.o(i.st_clust)
-    i.sync_window                            0x08003594   Section        0  ff.o(i.sync_window)
-    sync_window                              0x08003595   Thumb Code    96  ff.o(i.sync_window)
-    i.validate                               0x080035f4   Section        0  ff.o(i.validate)
-    validate                                 0x080035f5   Thumb Code    44  ff.o(i.validate)
-    .constdata                               0x08003620   Section       16  stm32f4xx_hal_rcc.o(.constdata)
-    .constdata                               0x08003630   Section        8  stm32f4xx_hal_dma.o(.constdata)
-    flagBitshiftOffset                       0x08003630   Data           8  stm32f4xx_hal_dma.o(.constdata)
-    .constdata                               0x08003638   Section      172  ff.o(.constdata)
-    ExCvt                                    0x08003638   Data         128  ff.o(.constdata)
-    vst                                      0x080036b8   Data          22  ff.o(.constdata)
-    cst                                      0x080036ce   Data          22  ff.o(.constdata)
-    .constdata                               0x080036e4   Section       20  sd_diskio.o(.constdata)
+    i.mem_cpy                                0x080033cc   Section        0  ff.o(i.mem_cpy)
+    mem_cpy                                  0x080033cd   Thumb Code    18  ff.o(i.mem_cpy)
+    i.mem_set                                0x080033de   Section        0  ff.o(i.mem_set)
+    mem_set                                  0x080033df   Thumb Code    14  ff.o(i.mem_set)
+    i.move_window                            0x080033ec   Section        0  ff.o(i.move_window)
+    move_window                              0x080033ed   Thumb Code    54  ff.o(i.move_window)
+    i.put_fat                                0x08003422   Section        0  ff.o(i.put_fat)
+    i.remove_chain                           0x0800351a   Section        0  ff.o(i.remove_chain)
+    remove_chain                             0x0800351b   Thumb Code   110  ff.o(i.remove_chain)
+    i.st_clust                               0x08003588   Section        0  ff.o(i.st_clust)
+    st_clust                                 0x08003589   Thumb Code    16  ff.o(i.st_clust)
+    i.sync_window                            0x08003598   Section        0  ff.o(i.sync_window)
+    sync_window                              0x08003599   Thumb Code    96  ff.o(i.sync_window)
+    i.validate                               0x080035f8   Section        0  ff.o(i.validate)
+    validate                                 0x080035f9   Thumb Code    44  ff.o(i.validate)
+    .constdata                               0x08003624   Section       16  stm32f4xx_hal_rcc.o(.constdata)
+    .constdata                               0x08003634   Section        8  stm32f4xx_hal_dma.o(.constdata)
+    flagBitshiftOffset                       0x08003634   Data           8  stm32f4xx_hal_dma.o(.constdata)
+    .constdata                               0x0800363c   Section      172  ff.o(.constdata)
+    ExCvt                                    0x0800363c   Data         128  ff.o(.constdata)
+    vst                                      0x080036bc   Data          22  ff.o(.constdata)
+    cst                                      0x080036d2   Data          22  ff.o(.constdata)
+    .constdata                               0x080036e8   Section       20  sd_diskio.o(.constdata)
     .data                                    0x20000000   Section        4  stm32f4xx_hal.o(.data)
     uwTick                                   0x20000000   Data           4  stm32f4xx_hal.o(.data)
     .data                                    0x20000004   Section        4  main.o(.data)
@@ -1410,11 +1411,11 @@ Image Symbol Table
     .bss                                     0x20000070   Section      724  main.o(.bss)
     .bss                                     0x20000344   Section       88  main.o(.bss)
     .bss                                     0x200003a0   Section       88  main.o(.bss)
-    .bss                                     0x200003f8   Section    16940  waveplayer.o(.bss)
-    .bss                                     0x20004624   Section       24  ff.o(.bss)
-    Files                                    0x20004624   Data          24  ff.o(.bss)
-    .bss                                     0x2000463c   Section       12  ff_gen_drv.o(.bss)
-    STACK                                    0x20004648   Section     1024  startup_stm32f429xx.o(STACK)
+    .bss                                     0x200003f8   Section    41516  waveplayer.o(.bss)
+    .bss                                     0x2000a624   Section       24  ff.o(.bss)
+    Files                                    0x2000a624   Data          24  ff.o(.bss)
+    .bss                                     0x2000a63c   Section       12  ff_gen_drv.o(.bss)
+    STACK                                    0x2000a648   Section     1024  startup_stm32f429xx.o(STACK)
 
     Global Symbols
 
@@ -1605,7 +1606,7 @@ Image Symbol Table
     SysTick_Handler                          0x08002363   Thumb Code    14  stm32f4xx_it.o(i.SysTick_Handler)
     SystemClock_Config                       0x08002371   Thumb Code   132  main.o(i.SystemClock_Config)
     SystemInit                               0x080023fd   Thumb Code    66  system_stm32f4xx.o(i.SystemInit)
-    WavePlayerStart_DMA                      0x08002451   Thumb Code    70  waveplayer.o(i.WavePlayerStart_DMA)
+    WavePlayerStart_DMA                      0x08002451   Thumb Code    72  waveplayer.o(i.WavePlayerStart_DMA)
     __0printf$bare                           0x080024ad   Thumb Code     8  printfb.o(i.__0printf$bare)
     __1printf$bare                           0x080024ad   Thumb Code     0  printfb.o(i.__0printf$bare)
     __2printf                                0x080024ad   Thumb Code     0  printfb.o(i.__0printf$bare)
@@ -1624,11 +1625,11 @@ Image Symbol Table
     get_fat                                  0x08003145   Thumb Code   194  ff.o(i.get_fat)
     get_fattime                              0x08003207   Thumb Code     4  fatfs.o(i.get_fattime)
     main                                     0x080032fd   Thumb Code   148  main.o(i.main)
-    put_fat                                  0x0800341f   Thumb Code   248  ff.o(i.put_fat)
-    APBAHBPrescTable                         0x08003620   Data          16  stm32f4xx_hal_rcc.o(.constdata)
-    SD_Driver                                0x080036e4   Data          20  sd_diskio.o(.constdata)
-    Region$$Table$$Base                      0x080036f8   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08003718   Number         0  anon$$obj.o(Region$$Table)
+    put_fat                                  0x08003423   Thumb Code   248  ff.o(i.put_fat)
+    APBAHBPrescTable                         0x08003624   Data          16  stm32f4xx_hal_rcc.o(.constdata)
+    SD_Driver                                0x080036e8   Data          20  sd_diskio.o(.constdata)
+    Region$$Table$$Base                      0x080036fc   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x0800371c   Number         0  anon$$obj.o(Region$$Table)
     res                                      0x20000004   Data           4  main.o(.data)
     bufSwitch                                0x20000008   Data           1  waveplayer.o(.data)
     playing                                  0x20000009   Data           1  waveplayer.o(.data)
@@ -1644,11 +1645,11 @@ Image Symbol Table
     fatfs                                    0x20000114   Data         560  main.o(.bss)
     hdma_spi2_tx                             0x20000344   Data          88  main.o(.bss)
     SDCardInfo                               0x200003a0   Data          88  main.o(.bss)
-    buf1                                     0x200003f8   Data        8192  waveplayer.o(.bss)
-    buf2                                     0x200023f8   Data        8192  waveplayer.o(.bss)
-    fr                                       0x200043f8   Data         556  waveplayer.o(.bss)
-    disk                                     0x2000463c   Data          12  ff_gen_drv.o(.bss)
-    __initial_sp                             0x20004a48   Data           0  startup_stm32f429xx.o(STACK)
+    buf1                                     0x200003f8   Data       20480  waveplayer.o(.bss)
+    buf2                                     0x200053f8   Data       20480  waveplayer.o(.bss)
+    fr                                       0x2000a3f8   Data         556  waveplayer.o(.bss)
+    disk                                     0x2000a63c   Data          12  ff_gen_drv.o(.bss)
+    __initial_sp                             0x2000aa48   Data           0  startup_stm32f429xx.o(STACK)
 
 
 
@@ -1658,35 +1659,35 @@ Memory Map of the image
 
   Image Entry point : 0x080001ad
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00003788, Max: 0x00200000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x0000378c, Max: 0x00200000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Base: 0x08000000, Size: 0x00003718, Max: 0x00200000, ABSOLUTE)
+    Execution Region ER_IROM1 (Base: 0x08000000, Size: 0x0000371c, Max: 0x00200000, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x08000000   0x000001ac   Data   RO         2179    RESET               startup_stm32f429xx.o
-    0x080001ac   0x00000000   Code   RO         2737  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
-    0x080001ac   0x00000004   Code   RO         3002    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
-    0x080001b0   0x00000004   Code   RO         3005    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
-    0x080001b4   0x00000000   Code   RO         3007    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
-    0x080001b4   0x00000000   Code   RO         3009    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
-    0x080001b4   0x00000008   Code   RO         3010    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
-    0x080001bc   0x00000000   Code   RO         3012    .ARM.Collect$$$$0000000D  mc_w.l(entry10a.o)
-    0x080001bc   0x00000000   Code   RO         3014    .ARM.Collect$$$$0000000F  mc_w.l(entry11a.o)
-    0x080001bc   0x00000004   Code   RO         3003    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
-    0x080001c0   0x00000024   Code   RO         2180    .text               startup_stm32f429xx.o
-    0x080001e4   0x00000024   Code   RO         3032    .text               mc_w.l(init.o)
-    0x08000208   0x0000000c   Code   RO         2041    i.BSP_SD_GetCardInfo  bsp_driver_sd.o
-    0x08000214   0x0000000c   Code   RO         2042    i.BSP_SD_GetStatus  bsp_driver_sd.o
-    0x08000220   0x00000028   Code   RO         2045    i.BSP_SD_Init       bsp_driver_sd.o
-    0x08000248   0x00000020   Code   RO         2047    i.BSP_SD_ReadBlocks  bsp_driver_sd.o
-    0x08000268   0x00000020   Code   RO         2049    i.BSP_SD_WriteBlocks  bsp_driver_sd.o
-    0x08000288   0x0000000c   Code   RO         1925    i.DMA1_Stream4_IRQHandler  stm32f4xx_it.o
+    0x08000000   0x000001ac   Data   RO         2180    RESET               startup_stm32f429xx.o
+    0x080001ac   0x00000000   Code   RO         2738  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
+    0x080001ac   0x00000004   Code   RO         3003    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
+    0x080001b0   0x00000004   Code   RO         3006    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
+    0x080001b4   0x00000000   Code   RO         3008    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
+    0x080001b4   0x00000000   Code   RO         3010    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
+    0x080001b4   0x00000008   Code   RO         3011    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
+    0x080001bc   0x00000000   Code   RO         3013    .ARM.Collect$$$$0000000D  mc_w.l(entry10a.o)
+    0x080001bc   0x00000000   Code   RO         3015    .ARM.Collect$$$$0000000F  mc_w.l(entry11a.o)
+    0x080001bc   0x00000004   Code   RO         3004    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
+    0x080001c0   0x00000024   Code   RO         2181    .text               startup_stm32f429xx.o
+    0x080001e4   0x00000024   Code   RO         3033    .text               mc_w.l(init.o)
+    0x08000208   0x0000000c   Code   RO         2042    i.BSP_SD_GetCardInfo  bsp_driver_sd.o
+    0x08000214   0x0000000c   Code   RO         2043    i.BSP_SD_GetStatus  bsp_driver_sd.o
+    0x08000220   0x00000028   Code   RO         2046    i.BSP_SD_Init       bsp_driver_sd.o
+    0x08000248   0x00000020   Code   RO         2048    i.BSP_SD_ReadBlocks  bsp_driver_sd.o
+    0x08000268   0x00000020   Code   RO         2050    i.BSP_SD_WriteBlocks  bsp_driver_sd.o
+    0x08000288   0x0000000c   Code   RO         1926    i.DMA1_Stream4_IRQHandler  stm32f4xx_it.o
     0x08000294   0x00000028   Code   RO         1327    i.DMA_CalcBaseAndBitshift  stm32f4xx_hal_dma.o
     0x080002bc   0x00000028   Code   RO         1328    i.DMA_SetConfig     stm32f4xx_hal_dma.o
-    0x080002e4   0x00000006   Code   RO         2690    i.FATFS_LinkDriver  ff_gen_drv.o
+    0x080002e4   0x00000006   Code   RO         2691    i.FATFS_LinkDriver  ff_gen_drv.o
     0x080002ea   0x00000002   PAD
-    0x080002ec   0x00000040   Code   RO         2691    i.FATFS_LinkDriverEx  ff_gen_drv.o
+    0x080002ec   0x00000040   Code   RO         2692    i.FATFS_LinkDriverEx  ff_gen_drv.o
     0x0800032c   0x00000054   Code   RO         1329    i.HAL_DMA_Abort     stm32f4xx_hal_dma.o
     0x08000380   0x000001a0   Code   RO         1333    i.HAL_DMA_IRQHandler  stm32f4xx_hal_dma.o
     0x08000520   0x00000078   Code   RO         1334    i.HAL_DMA_Init      stm32f4xx_hal_dma.o
@@ -1700,8 +1701,8 @@ Memory Map of the image
     0x080008a0   0x00000164   Code   RO          722    i.HAL_I2S_Init      stm32f4xx_hal_i2s_ex.o
     0x08000a04   0x00000094   Code   RO         1799    i.HAL_I2S_MspInit   stm32f4xx_hal_msp.o
     0x08000a98   0x000000a8   Code   RO         1164    i.HAL_I2S_Transmit_DMA  stm32f4xx_hal_i2s.o
-    0x08000b40   0x00000074   Code   RO         1983    i.HAL_I2S_TxCpltCallback  waveplayer.o
-    0x08000bb4   0x00000002   Code   RO         1984    i.HAL_I2S_TxHalfCpltCallback  waveplayer.o
+    0x08000b40   0x00000074   Code   RO         1984    i.HAL_I2S_TxCpltCallback  waveplayer.o
+    0x08000bb4   0x00000002   Code   RO         1985    i.HAL_I2S_TxHalfCpltCallback  waveplayer.o
     0x08000bb6   0x00000002   PAD
     0x08000bb8   0x00000010   Code   RO          821    i.HAL_IncTick       stm32f4xx_hal.o
     0x08000bc8   0x00000034   Code   RO          822    i.HAL_Init          stm32f4xx_hal.o
@@ -1732,7 +1733,7 @@ Memory Map of the image
     0x08001b90   0x0000000a   Code   RO         1170    i.I2S_DMATxHalfCplt  stm32f4xx_hal_i2s.o
     0x08001b9a   0x00000002   PAD
     0x08001b9c   0x00000058   Code   RO          726    i.I2S_GetInputClock  stm32f4xx_hal_i2s_ex.o
-    0x08001bf4   0x0000001c   Code   RO         2144    i.MX_FATFS_Init     fatfs.o
+    0x08001bf4   0x0000001c   Code   RO         2145    i.MX_FATFS_Init     fatfs.o
     0x08001c10   0x0000006c   Code   RO         1847    i.MX_GPIO_Init      main.o
     0x08001c7c   0x00000020   Code   RO          495    i.NVIC_SetPriority  stm32f4xx_hal_cortex.o
     0x08001c9c   0x00000024   Code   RO         1464    i.SDIO_DataConfig   stm32f4xx_ll_sdmmc.o
@@ -1752,85 +1753,85 @@ Memory Map of the image
     0x08001f08   0x000000dc   Code   RO         1594    i.SD_Initialize_Cards  stm32f4xx_hal_sd.o
     0x08001fe4   0x0000013c   Code   RO         1595    i.SD_IsCardProgramming  stm32f4xx_hal_sd.o
     0x08002120   0x00000174   Code   RO         1596    i.SD_PowerON        stm32f4xx_hal_sd.o
-    0x08002294   0x00000020   Code   RO         2599    i.SD_initialize     sd_diskio.o
-    0x080022b4   0x00000050   Code   RO         2600    i.SD_ioctl          sd_diskio.o
-    0x08002304   0x0000001e   Code   RO         2601    i.SD_read           sd_diskio.o
+    0x08002294   0x00000020   Code   RO         2600    i.SD_initialize     sd_diskio.o
+    0x080022b4   0x00000050   Code   RO         2601    i.SD_ioctl          sd_diskio.o
+    0x08002304   0x0000001e   Code   RO         2602    i.SD_read           sd_diskio.o
     0x08002322   0x00000002   PAD
-    0x08002324   0x00000020   Code   RO         2602    i.SD_status         sd_diskio.o
-    0x08002344   0x0000001e   Code   RO         2603    i.SD_write          sd_diskio.o
-    0x08002362   0x0000000e   Code   RO         1926    i.SysTick_Handler   stm32f4xx_it.o
+    0x08002324   0x00000020   Code   RO         2603    i.SD_status         sd_diskio.o
+    0x08002344   0x0000001e   Code   RO         2604    i.SD_write          sd_diskio.o
+    0x08002362   0x0000000e   Code   RO         1927    i.SysTick_Handler   stm32f4xx_it.o
     0x08002370   0x0000008c   Code   RO         1848    i.SystemClock_Config  main.o
-    0x080023fc   0x00000054   Code   RO         2188    i.SystemInit        system_stm32f4xx.o
-    0x08002450   0x0000005c   Code   RO         1987    i.WavePlayerStart_DMA  waveplayer.o
-    0x080024ac   0x00000010   Code   RO         2743    i.__0printf$bare    mc_w.l(printfb.o)
-    0x080024bc   0x0000000e   Code   RO         3044    i.__scatterload_copy  mc_w.l(handlers.o)
-    0x080024ca   0x00000002   Code   RO         3045    i.__scatterload_null  mc_w.l(handlers.o)
-    0x080024cc   0x0000000e   Code   RO         3046    i.__scatterload_zeroinit  mc_w.l(handlers.o)
-    0x080024da   0x00000022   Code   RO         2750    i._printf_core      mc_w.l(printfb.o)
-    0x080024fc   0x00000060   Code   RO         2224    i.check_fs          ff.o
-    0x0800255c   0x0000006c   Code   RO         2225    i.chk_lock          ff.o
-    0x080025c8   0x00000024   Code   RO         2226    i.clear_lock        ff.o
-    0x080025ec   0x0000002a   Code   RO         2227    i.clmt_clust        ff.o
-    0x08002616   0x0000001e   Code   RO         2228    i.clust2sect        ff.o
-    0x08002634   0x000000b0   Code   RO         2229    i.create_chain      ff.o
-    0x080026e4   0x00000100   Code   RO         2230    i.create_name       ff.o
-    0x080027e4   0x0000011e   Code   RO         2232    i.dir_next          ff.o
-    0x08002902   0x00000076   Code   RO         2234    i.dir_register      ff.o
-    0x08002978   0x00000098   Code   RO         2236    i.dir_sdi           ff.o
-    0x08002a10   0x00000028   Code   RO         2544    i.disk_initialize   diskio.o
-    0x08002a38   0x0000001c   Code   RO         2546    i.disk_read         diskio.o
-    0x08002a54   0x00000018   Code   RO         2547    i.disk_status       diskio.o
-    0x08002a6c   0x0000001c   Code   RO         2548    i.disk_write        diskio.o
-    0x08002a88   0x0000005c   Code   RO         2245    i.f_mount           ff.o
-    0x08002ae4   0x000001a0   Code   RO         2246    i.f_open            ff.o
-    0x08002c84   0x0000018c   Code   RO         2251    i.f_read            ff.o
-    0x08002e10   0x00000258   Code   RO         2260    i.find_volume       ff.o
-    0x08003068   0x000000c0   Code   RO         2261    i.follow_path       ff.o
-    0x08003128   0x0000001c   Code   RO         1959    i.fputc             debug.o
-    0x08003144   0x000000c2   Code   RO         2262    i.get_fat           ff.o
-    0x08003206   0x00000004   Code   RO         2145    i.get_fattime       fatfs.o
-    0x0800320a   0x0000003c   Code   RO         2264    i.get_ldnumber      ff.o
+    0x080023fc   0x00000054   Code   RO         2189    i.SystemInit        system_stm32f4xx.o
+    0x08002450   0x0000005c   Code   RO         1988    i.WavePlayerStart_DMA  waveplayer.o
+    0x080024ac   0x00000010   Code   RO         2744    i.__0printf$bare    mc_w.l(printfb.o)
+    0x080024bc   0x0000000e   Code   RO         3045    i.__scatterload_copy  mc_w.l(handlers.o)
+    0x080024ca   0x00000002   Code   RO         3046    i.__scatterload_null  mc_w.l(handlers.o)
+    0x080024cc   0x0000000e   Code   RO         3047    i.__scatterload_zeroinit  mc_w.l(handlers.o)
+    0x080024da   0x00000022   Code   RO         2751    i._printf_core      mc_w.l(printfb.o)
+    0x080024fc   0x00000060   Code   RO         2225    i.check_fs          ff.o
+    0x0800255c   0x0000006c   Code   RO         2226    i.chk_lock          ff.o
+    0x080025c8   0x00000024   Code   RO         2227    i.clear_lock        ff.o
+    0x080025ec   0x0000002a   Code   RO         2228    i.clmt_clust        ff.o
+    0x08002616   0x0000001e   Code   RO         2229    i.clust2sect        ff.o
+    0x08002634   0x000000b0   Code   RO         2230    i.create_chain      ff.o
+    0x080026e4   0x00000100   Code   RO         2231    i.create_name       ff.o
+    0x080027e4   0x0000011e   Code   RO         2233    i.dir_next          ff.o
+    0x08002902   0x00000076   Code   RO         2235    i.dir_register      ff.o
+    0x08002978   0x00000098   Code   RO         2237    i.dir_sdi           ff.o
+    0x08002a10   0x00000028   Code   RO         2545    i.disk_initialize   diskio.o
+    0x08002a38   0x0000001c   Code   RO         2547    i.disk_read         diskio.o
+    0x08002a54   0x00000018   Code   RO         2548    i.disk_status       diskio.o
+    0x08002a6c   0x0000001c   Code   RO         2549    i.disk_write        diskio.o
+    0x08002a88   0x0000005c   Code   RO         2246    i.f_mount           ff.o
+    0x08002ae4   0x000001a0   Code   RO         2247    i.f_open            ff.o
+    0x08002c84   0x0000018c   Code   RO         2252    i.f_read            ff.o
+    0x08002e10   0x00000258   Code   RO         2261    i.find_volume       ff.o
+    0x08003068   0x000000c0   Code   RO         2262    i.follow_path       ff.o
+    0x08003128   0x0000001c   Code   RO         1960    i.fputc             debug.o
+    0x08003144   0x000000c2   Code   RO         2263    i.get_fat           ff.o
+    0x08003206   0x00000004   Code   RO         2146    i.get_fattime       fatfs.o
+    0x0800320a   0x0000003c   Code   RO         2265    i.get_ldnumber      ff.o
     0x08003246   0x00000002   PAD
-    0x08003248   0x000000a0   Code   RO         2265    i.inc_lock          ff.o
-    0x080032e8   0x00000014   Code   RO         2266    i.ld_clust          ff.o
-    0x080032fc   0x000000cc   Code   RO         1849    i.main              main.o
-    0x080033c8   0x00000012   Code   RO         2267    i.mem_cpy           ff.o
-    0x080033da   0x0000000e   Code   RO         2268    i.mem_set           ff.o
-    0x080033e8   0x00000036   Code   RO         2269    i.move_window       ff.o
-    0x0800341e   0x000000f8   Code   RO         2270    i.put_fat           ff.o
-    0x08003516   0x0000006e   Code   RO         2272    i.remove_chain      ff.o
-    0x08003584   0x00000010   Code   RO         2273    i.st_clust          ff.o
-    0x08003594   0x00000060   Code   RO         2275    i.sync_window       ff.o
-    0x080035f4   0x0000002c   Code   RO         2276    i.validate          ff.o
-    0x08003620   0x00000010   Data   RO           18    .constdata          stm32f4xx_hal_rcc.o
-    0x08003630   0x00000008   Data   RO         1338    .constdata          stm32f4xx_hal_dma.o
-    0x08003638   0x000000ac   Data   RO         2278    .constdata          ff.o
-    0x080036e4   0x00000014   Data   RO         2604    .constdata          sd_diskio.o
-    0x080036f8   0x00000020   Data   RO         3042    Region$$Table       anon$$obj.o
+    0x08003248   0x000000a0   Code   RO         2266    i.inc_lock          ff.o
+    0x080032e8   0x00000014   Code   RO         2267    i.ld_clust          ff.o
+    0x080032fc   0x000000d0   Code   RO         1849    i.main              main.o
+    0x080033cc   0x00000012   Code   RO         2268    i.mem_cpy           ff.o
+    0x080033de   0x0000000e   Code   RO         2269    i.mem_set           ff.o
+    0x080033ec   0x00000036   Code   RO         2270    i.move_window       ff.o
+    0x08003422   0x000000f8   Code   RO         2271    i.put_fat           ff.o
+    0x0800351a   0x0000006e   Code   RO         2273    i.remove_chain      ff.o
+    0x08003588   0x00000010   Code   RO         2274    i.st_clust          ff.o
+    0x08003598   0x00000060   Code   RO         2276    i.sync_window       ff.o
+    0x080035f8   0x0000002c   Code   RO         2277    i.validate          ff.o
+    0x08003624   0x00000010   Data   RO           18    .constdata          stm32f4xx_hal_rcc.o
+    0x08003634   0x00000008   Data   RO         1338    .constdata          stm32f4xx_hal_dma.o
+    0x0800363c   0x000000ac   Data   RO         2279    .constdata          ff.o
+    0x080036e8   0x00000014   Data   RO         2605    .constdata          sd_diskio.o
+    0x080036fc   0x00000020   Data   RO         3043    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Base: 0x20000000, Size: 0x00004a48, Max: 0x00030000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Base: 0x20000000, Size: 0x0000aa48, Max: 0x00030000, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x20000000   0x00000004   Data   RW          828    .data               stm32f4xx_hal.o
-    0x20000004   0x00000004   Data   RW         1854    .data               main.o
-    0x20000008   0x0000004c   Data   RW         1989    .data               waveplayer.o
-    0x20000054   0x00000005   Data   RW         2146    .data               fatfs.o
+    0x20000004   0x00000004   Data   RW         1855    .data               main.o
+    0x20000008   0x0000004c   Data   RW         1990    .data               waveplayer.o
+    0x20000054   0x00000005   Data   RW         2147    .data               fatfs.o
     0x20000059   0x00000003   PAD
-    0x2000005c   0x00000004   Data   RW         2190    .data               system_stm32f4xx.o
-    0x20000060   0x00000008   Data   RW         2279    .data               ff.o
-    0x20000068   0x00000001   Data   RW         2605    .data               sd_diskio.o
+    0x2000005c   0x00000004   Data   RW         2191    .data               system_stm32f4xx.o
+    0x20000060   0x00000008   Data   RW         2280    .data               ff.o
+    0x20000068   0x00000001   Data   RW         2606    .data               sd_diskio.o
     0x20000069   0x00000003   PAD
-    0x2000006c   0x00000004   Data   RW         3016    .data               mc_w.l(stdout.o)
+    0x2000006c   0x00000004   Data   RW         3017    .data               mc_w.l(stdout.o)
     0x20000070   0x000002d4   Zero   RW         1850    .bss                main.o
     0x20000344   0x00000058   Zero   RW         1851    .bss                main.o
     0x2000039c   0x00000004   PAD
     0x200003a0   0x00000058   Zero   RW         1852    .bss                main.o
-    0x200003f8   0x0000422c   Zero   RW         1988    .bss                waveplayer.o
-    0x20004624   0x00000018   Zero   RW         2277    .bss                ff.o
-    0x2000463c   0x0000000c   Zero   RW         2694    .bss                ff_gen_drv.o
-    0x20004648   0x00000400   Zero   RW         2177    STACK               startup_stm32f429xx.o
+    0x200003f8   0x0000a22c   Zero   RW         1989    .bss                waveplayer.o
+    0x2000a624   0x00000018   Zero   RW         2278    .bss                ff.o
+    0x2000a63c   0x0000000c   Zero   RW         2695    .bss                ff_gen_drv.o
+    0x2000a648   0x00000400   Zero   RW         2178    STACK               startup_stm32f429xx.o
 
 
 ==============================================================================
@@ -1846,7 +1847,7 @@ Image component sizes
         32         10          0          5          0       1358   fatfs.o
       4030         64        172          8         24      29666   ff.o
         70          4          0          0         12       1599   ff_gen_drv.o
-       452         72          0          4        900       9353   main.o
+       456         76          0          4        900       9391   main.o
        204         18         20          1          0       4180   sd_diskio.o
         36          8        428          0       1024        912   startup_stm32f429xx.o
        136         16          0          4          0       4078   stm32f4xx_hal.o
@@ -1862,10 +1863,10 @@ Image component sizes
         26          6          0          0          0        944   stm32f4xx_it.o
        158          4          0          0          0       5949   stm32f4xx_ll_sdmmc.o
         84         18          0          4          0       1305   system_stm32f4xx.o
-       210         38          0         76      16940       2510   waveplayer.o
+       210         36          0         76      41516       2510   waveplayer.o
 
     ----------------------------------------------------------------------
-     13292        600        676        108      18904     525776   Object Totals
+     13296        602        676        108      43480     525814   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         18          0          0          6          4          0   (incl. Padding)
 
@@ -1906,15 +1907,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     13428        624        676        112      18904     515648   Grand Totals
-     13428        624        676        112      18904     515648   ELF Image Totals
-     13428        624        676        112          0          0   ROM Totals
+     13432        626        676        112      43480     515686   Grand Totals
+     13432        626        676        112      43480     515686   ELF Image Totals
+     13432        626        676        112          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                14104 (  13.77kB)
-    Total RW  Size (RW Data + ZI Data)             19016 (  18.57kB)
-    Total ROM Size (Code + RO Data + RW Data)      14216 (  13.88kB)
+    Total RO  Size (Code + RO Data)                14108 (  13.78kB)
+    Total RW  Size (RW Data + ZI Data)             43592 (  42.57kB)
+    Total ROM Size (Code + RO Data + RW Data)      14220 (  13.89kB)
 
 ==============================================================================
 
