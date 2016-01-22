@@ -33,7 +33,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
 #include "fatfs.h"
-#include "usb_host.h"
 
 /* USER CODE BEGIN Includes */
 #include "debug.h"
@@ -41,27 +40,28 @@
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
-I2S_HandleTypeDef hi2s3;
-DMA_HandleTypeDef hdma_spi3_tx;
+I2S_HandleTypeDef hi2s2;
+DMA_HandleTypeDef hdma_spi2_tx;
 
-SPI_HandleTypeDef hspi1;
+SD_HandleTypeDef hsd;
+HAL_SD_CardInfoTypedef SDCardInfo;
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
 extern const uint16_t AUDIO_SAMPLE[];
-extern uint8_t retUSBH;
-extern char USBH_Path[4];
-USBH_StatusTypeDef usb_status;
+extern uint8_t retSD;    /* Return value for SD */
+extern char SD_Path[4];  /* SD logical drive path */
 FATFS fatfs;
+int res;
+HAL_SD_CardInfoTypedef SDInfo;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
-static void MX_I2S3_Init(void);
-static void MX_SPI1_Init(void);
-void MX_USB_HOST_Process(void);
+static void MX_I2S2_Init(void);
+static void MX_SDIO_SD_Init(void);
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
@@ -90,20 +90,19 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_DMA_Init();
-  MX_I2S3_Init();
-  MX_SPI1_Init();
+  MX_I2S2_Init();
+  MX_SDIO_SD_Init();
   MX_FATFS_Init();
-  MX_USB_HOST_Init();
 
   /* USER CODE BEGIN 2 */
 	printf("Init complete");
-	MX_USB_HOST_Process();
-	if(f_mount (&fatfs, USBH_Path, 1)!=FR_OK)
+	while((res=f_mount (&fatfs, SD_Path, 1))!=FR_OK)
 	{
 		printf("QQ");
-		while(1);
+		//while(1);
 	}
-	WavePlayerStart("0:/test.wav");
+	//WavePlayerStart("0:/test.wav");
+	while(WavePlayerStart("0:/test.wav")==-1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -111,7 +110,6 @@ int main(void)
   while (1)
   {
   /* USER CODE END WHILE */
-    
 
   /* USER CODE BEGIN 3 */
 
@@ -157,41 +155,36 @@ void SystemClock_Config(void)
   HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
 }
 
-/* I2S3 init function */
-void MX_I2S3_Init(void)
+/* I2S2 init function */
+void MX_I2S2_Init(void)
 {
 
-  hi2s3.Instance = SPI3;
-  hi2s3.Init.Mode = I2S_MODE_MASTER_TX;
-  hi2s3.Init.Standard = I2S_STANDARD_PHILLIPS;
-  hi2s3.Init.DataFormat = I2S_DATAFORMAT_16B;
-  hi2s3.Init.MCLKOutput = I2S_MCLKOUTPUT_ENABLE;
-  hi2s3.Init.AudioFreq = I2S_AUDIOFREQ_44K;
-  hi2s3.Init.CPOL = I2S_CPOL_LOW;
-  hi2s3.Init.ClockSource = I2S_CLOCK_PLL;
-  hi2s3.Init.FullDuplexMode = I2S_FULLDUPLEXMODE_DISABLE;
-  HAL_I2S_Init(&hi2s3);
+  hi2s2.Instance = SPI2;
+  hi2s2.Init.Mode = I2S_MODE_MASTER_TX;
+  hi2s2.Init.Standard = I2S_STANDARD_PHILLIPS;
+  hi2s2.Init.DataFormat = I2S_DATAFORMAT_16B;
+  hi2s2.Init.MCLKOutput = I2S_MCLKOUTPUT_DISABLE;
+  hi2s2.Init.AudioFreq = I2S_AUDIOFREQ_44K;
+  hi2s2.Init.CPOL = I2S_CPOL_LOW;
+  hi2s2.Init.ClockSource = I2S_CLOCK_PLL;
+  hi2s2.Init.FullDuplexMode = I2S_FULLDUPLEXMODE_DISABLE;
+  HAL_I2S_Init(&hi2s2);
 
 }
 
-/* SPI1 init function */
-void MX_SPI1_Init(void)
+/* SDIO init function */
+void MX_SDIO_SD_Init(void)
 {
 
-  hspi1.Instance = SPI1;
-  hspi1.Init.Mode = SPI_MODE_MASTER;
-  hspi1.Init.Direction = SPI_DIRECTION_2LINES;
-  hspi1.Init.DataSize = SPI_DATASIZE_8BIT;
-  hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
-  hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
-  hspi1.Init.NSS = SPI_NSS_SOFT;
-  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
-  hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
-  hspi1.Init.TIMode = SPI_TIMODE_DISABLED;
-  hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLED;
-  hspi1.Init.CRCPolynomial = 10;
-  HAL_SPI_Init(&hspi1);
-
+  hsd.Instance = SDIO;
+  hsd.Init.ClockEdge = SDIO_CLOCK_EDGE_RISING;
+  hsd.Init.ClockBypass = SDIO_CLOCK_BYPASS_DISABLE;
+  hsd.Init.ClockPowerSave = SDIO_CLOCK_POWER_SAVE_DISABLE;
+  hsd.Init.BusWide = SDIO_BUS_WIDE_1B;
+  hsd.Init.HardwareFlowControl = SDIO_HARDWARE_FLOW_CONTROL_DISABLE;
+  hsd.Init.ClockDiv = 0;
+	//SD_Initialize_Cards(&hsd);
+	HAL_SD_Init(&hsd, &SDInfo);
 }
 
 /** 
@@ -203,6 +196,8 @@ void MX_DMA_Init(void)
   __DMA1_CLK_ENABLE();
 
   /* DMA interrupt init */
+  HAL_NVIC_SetPriority(DMA1_Stream4_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream4_IRQn);
   HAL_NVIC_SetPriority(DMA1_Stream5_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(DMA1_Stream5_IRQn);
 
@@ -214,15 +209,27 @@ void MX_DMA_Init(void)
         * Output
         * EVENT_OUT
         * EXTI
+     PA4   ------> I2S3_WS
 */
 void MX_GPIO_Init(void)
 {
 
+  GPIO_InitTypeDef GPIO_InitStruct;
+
   /* GPIO Ports Clock Enable */
   __GPIOH_CLK_ENABLE();
-  __GPIOA_CLK_ENABLE();
   __GPIOC_CLK_ENABLE();
+  __GPIOA_CLK_ENABLE();
   __GPIOB_CLK_ENABLE();
+  __GPIOD_CLK_ENABLE();
+
+  /*Configure GPIO pin : PA4 */
+  GPIO_InitStruct.Pin = GPIO_PIN_4;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_LOW;
+  GPIO_InitStruct.Alternate = GPIO_AF6_SPI3;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 }
 

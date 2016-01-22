@@ -29,6 +29,5 @@ audio2015 configuration\stm32f4xx_hal_i2s.o: ../Drivers/STM32F4xx_HAL_Driver/Inc
 audio2015 configuration\stm32f4xx_hal_i2s.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2s_ex.h
 audio2015 configuration\stm32f4xx_hal_i2s.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 audio2015 configuration\stm32f4xx_hal_i2s.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
-audio2015 configuration\stm32f4xx_hal_i2s.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
-audio2015 configuration\stm32f4xx_hal_i2s.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_hcd.h
-audio2015 configuration\stm32f4xx_hal_i2s.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h
+audio2015 configuration\stm32f4xx_hal_i2s.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_sd.h
+audio2015 configuration\stm32f4xx_hal_i2s.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_sdmmc.h
