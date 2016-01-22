@@ -1,16 +1,45 @@
 #include "waveplayer.h"
 
 #define BUFLEN 1024
-#define BUFLEN_BYTE 4096
+#define BUFLEN_BYTE (BUFLEN*sizeof(uint16_t))
 extern FATFS fatfs;
 extern I2S_HandleTypeDef hi2s2;
 FIL fr;
-uint32_t buf1[BUFLEN]={0};
-uint32_t buf2[BUFLEN]={0};
+uint16_t buf1[BUFLEN]={0};
+uint16_t buf2[BUFLEN]={0};
 UINT bytesRead1=0,bytesRead2=0;
 uint8_t bufSwitch=0,playing=0;
+uint16_t AUDIO_SAMPLE[32]={0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
 
+void WavePlayerStartSample()
+{
+	while(1)
+	{
+		HAL_I2S_Transmit(&hi2s2, (uint16_t*)AUDIO_SAMPLE, 32,32768);
+	}
+}
+	
 int8_t WavePlayerStart(char *fname)
+{
+	bufSwitch = 0;
+	if(f_open(&fr, fname , FA_READ) != FR_OK)
+	{
+		return -1;
+	}else
+	{
+		playing=1;
+		do
+		{
+			f_read (&fr, buf1, BUFLEN_BYTE, &bytesRead1);
+			if(bytesRead1>0)
+				HAL_I2S_Transmit(&hi2s2, (uint16_t*)buf1, BUFLEN,1000000);
+		}while(bytesRead1>0);
+		playing=0;
+	}
+	return 1;
+}
+
+int8_t WavePlayerStart_DMA(char *fname)
 {
 	bufSwitch = 0;
 	if(f_open(&fr, fname , FA_READ) != FR_OK)
