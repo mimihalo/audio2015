@@ -136,11 +136,11 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLM = 15;
   RCC_OscInitStruct.PLL.PLLN = 144;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
-  RCC_OscInitStruct.PLL.PLLQ = 5;
+  RCC_OscInitStruct.PLL.PLLQ = 4;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
 
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_I2S;
-  PeriphClkInitStruct.PLLI2S.PLLI2SN = 94;
+  PeriphClkInitStruct.PLLI2S.PLLI2SN = 120;
   PeriphClkInitStruct.PLLI2S.PLLI2SR = 2;
   HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
 

@@ -1,6 +1,6 @@
 #include "waveplayer.h"
 
-#define BUFLEN 1024
+#define BUFLEN 4096
 #define BUFLEN_BYTE (BUFLEN*sizeof(uint16_t))
 extern FATFS fatfs;
 extern I2S_HandleTypeDef hi2s2;
