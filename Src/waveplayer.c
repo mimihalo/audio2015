@@ -41,7 +41,7 @@ int8_t WavePlayerStart(char *fname)
 
 int8_t WavePlayerStart_DMA(char *fname)
 {
-	bufSwitch = 0;
+	
 	if(f_open(&fr, fname , FA_READ) != FR_OK)
 	{
 		return -1;
@@ -49,30 +49,16 @@ int8_t WavePlayerStart_DMA(char *fname)
 	{
 		playing=1;
 		f_read (&fr, buf1, BUFLEN_BYTE, &bytesRead1);
+		f_read (&fr, buf2, BUFLEN_BYTE, &bytesRead2);
 		HAL_I2S_Transmit_DMA(&hi2s2, (uint16_t*)buf1, BUFLEN);
+		bufSwitch = 1;
 	}
 	return 1;
 }
 
 void HAL_I2S_TxHalfCpltCallback(I2S_HandleTypeDef *hi2s)
 {
-	bufSwitch = !bufSwitch;
 	
-	if(bufSwitch)
-	{
-		f_read (&fr, buf2, BUFLEN_BYTE, &bytesRead2);
-		if(bytesRead2<=0)
-		{
-			playing=0;
-		}
-	}else
-	{
-		f_read (&fr, buf1, BUFLEN_BYTE, &bytesRead1);
-		if(bytesRead1<=0)
-		{
-			playing=0;
-		}
-	}
 }
 
  void HAL_I2S_TxCpltCallback(I2S_HandleTypeDef *hi2s)
@@ -86,5 +72,23 @@ void HAL_I2S_TxHalfCpltCallback(I2S_HandleTypeDef *hi2s)
 	}else
 	{
 		HAL_I2S_DMAStop(&hi2s2);
+	}
+	
+	if(bufSwitch)
+	{
+		f_read (&fr, buf1, BUFLEN_BYTE, &bytesRead1);
+		bufSwitch = 0;
+		if(bytesRead2<=0)
+		{
+			playing=0;
+		}
+	}else
+	{
+		f_read (&fr, buf2, BUFLEN_BYTE, &bytesRead2);
+		bufSwitch = 1;
+		if(bytesRead1<=0)
+		{
+			playing=0;
+		}
 	}
 }

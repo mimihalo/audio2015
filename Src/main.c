@@ -100,8 +100,7 @@ int main(void)
 	{
 		printf("QQ");
 	}
-	//while(WavePlayerStart("0:/test.wav")==-1);
-	//while(WavePlayerStart("0:/test.wav")==-1);
+	WavePlayerStart_DMA("0:/test.wav");
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -111,7 +110,7 @@ int main(void)
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
-		WavePlayerStart("0:/test.wav");
+		//WavePlayerStart_DMA("0:/test.wav");
   }
   /* USER CODE END 3 */
 
